@@ -1,0 +1,58 @@
+#! /bin/sh
+
+bspc monitor DP-3 -d 1 2 3
+bspc monitor DP-2 -d 4 5 6
+
+
+
+bspc config top_padding 0
+#bspc config -m DP-1 top_padding 24
+
+# Visual options
+bspc config border_width        1
+bspc config window_gap          0
+
+bspc config split_ratio         0.50
+bspc config borderless_monocle  true
+bspc config gapless_monocle     true
+bspc config focus_follows_pointer false
+bspc config auto_alternate true
+bspc config auto_cancel true
+bspc config normal_border_color "#504339"
+bspc config active_border_color "#504339"
+bspc config focused_border_color "#FFA500"
+bspc config presel_border_color "#9a875f"
+bspc config urgent_border_color "#504339"
+bspc config focused_locked_border_color "#8c644c"
+bspc config normal_frame_opacity 0.0
+bspc config focused_frame_opacity 0.1
+bspc config remove_disabled_monitors true
+bspc config remove_unplugged_monitors true
+bspc config remove_unplugged_monitors true
+bspc config merge_overlapping_monitors true
+bspc rule -a Gimp floating=on
+bspc rule -a gimp floating=on
+bspc rule -a dia floating=on
+bspc rule -a Dia floating=on
+
+for PID in `pgrep panel`; do
+	kill ${PID} > /dev/null &
+done
+
+for PID in `pgrep lemonbar`; do
+	kill ${PID} > /dev/null &
+done
+
+panel &
+
+for PID in `pgrep xscreensaver`; do
+	kill ${PID} > /dev/null &
+done
+
+xscreensaver &
+
+wmname LG3D &
+
+#synergys -c $HOME/.synergy.conf --enable-crypto &
+
+dunst &

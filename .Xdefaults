@@ -1,0 +1,12 @@
+# term name set for SSH session
+URxvt*termName: rxvt-256color
+URxvt*loginShell: true
+
+URxvt*font: xft:Roboto Mono for Powerline:pixelsize=15
+
+# scrollbar - true (default) or false
+URxvt*scrollBar: false
+URxvt*saveLines: 8192
+
+URxvt*iso14755: false
+URxvt*iso14755_52: false
