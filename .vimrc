@@ -15,6 +15,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 Plug 'xolox/vim-misc'
 Plug 'elzr/vim-json'
+Plug 'rodjek/vim-puppet'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
@@ -23,6 +24,7 @@ map , :Rg<CR>
 map . :BLines<CR>
 map m :Lines<CR>
 map <C-n> :NERDTreeToggle<CR>
+map <C-l> :call delete(expand('%'))
 
 nmap <F8> :TagbarToggle<CR>
 nmap <Leader>w <Plug>(easymotion-overwin-w)
@@ -33,6 +35,7 @@ set clipboard=unnamedplus
 
 set number
 
+highlight CocFloating ctermbg=0*
 highlight Visual cterm=reverse ctermbg=NONE
 
 set tabstop=2       " The width of a TAB is set to 2.
@@ -46,13 +49,11 @@ set softtabstop=2   " Sets the number of columns for a TAB
 
 set expandtab       " Expand TABs to spaces
 
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#pum#visible() ? coc#pum#next(1):
+      \ CheckBackspace() ? "\<Tab>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
 let g:lightline = {
       \ 'active': {
